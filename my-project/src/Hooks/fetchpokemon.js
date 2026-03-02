@@ -5,24 +5,28 @@ export const useFetchPokemon = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getIdFromUrl = (url) => {
-    const parts = url.split("/").filter(Boolean);
-    return parts[parts.length - 1];
-  };
-
   const fetchPokemon = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+      const response = await fetch("http://localhost:3001/pokemon?limit=151");
       if (!response.ok) throw new Error("Network response was not ok");
 
       const data = await response.json();
 
-      const mapped = data.results.map((p) => {
-        const id = getIdFromUrl(p.url);
-        return {...p,id: Number(id),sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,};});
+      console.log(Array.isArray(data), data[0], data.results);
+
+      const mapped = data.map((p) => ({
+        id: p.id,
+        name: p.name,
+        sprite: p.sprites,
+        types: p.types,
+        height: p.height,
+        weight: p.weight,
+        description: p.description,
+        abilities: p.abilities,
+      }));
 
       setPokemonList(mapped);
     } catch (err) {
