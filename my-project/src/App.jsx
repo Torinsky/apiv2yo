@@ -58,7 +58,7 @@ function App() {
   const goNext = () => setPage((p) => Math.min(lastPage, p + 1));
 
   return (
-    <div className="bg-green-500 min-h-screen">
+    <div className="bg-[#DC0028] min-h-screen">
       <div className="bg-gray-700 px-4 py-2 text-white">
         <h1 className="text-4xl font-[font-pokemon] text-center">Pokémon API</h1>
 
@@ -123,7 +123,7 @@ function App() {
         </div>
 
         {/* 30% */}
-        <div className="w-full md:basis-[30%] bg-[#DC0028] px-2 py-10 flex flex-col items-center border-l-4 border-[#DC0028]">
+        <div className="w-full md:basis-[30%] bg-[#DC0028] px-30 py-10 flex flex-col items-center border-l-4 border-[#DC0028]">
           {loadingDetails && (
             <p className="text-white mt-1">Loading details...</p>
           )}
